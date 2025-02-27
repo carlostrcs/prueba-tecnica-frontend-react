@@ -1,0 +1,125 @@
+/* Estilos generales */
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* Estilos para la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f5f5f5;
+}
+
+img {
+  border-radius: 50%;
+}
+
+button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+button:hover {
+  background-color: #c0392b;
+}
+
+/* Botones de acciones externas */
+.actions {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.actions button {
+  margin: 0 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background-color: #2980b9;
+}
+
+/* Estilos para el Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal form div {
+  margin-bottom: 10px;
+}
+
+.modal form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.modal form input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Diseño responsive */
+@media (max-width: 600px) {
+  .App {
+    padding: 10px;
+  }
+
+  table, th, td {
+    font-size: 12px;
+  }
+
+  .actions button {
+    padding: 8px 12px;
+    margin: 5px;
+  }
+}
