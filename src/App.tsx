@@ -2,26 +2,8 @@ import React, { useEffect, useState } from 'react';
 import UserTable from './components/UserTable';
 import UserModal from './components/UserModal';
 import './App.css';
-
-export interface User {
-    login: {
-        uuid: string;
-    };
-    name: {
-        title: string;
-        first: string;
-        last: string;
-    };
-    email: string;
-    picture: {
-        thumbnail: string;
-        medium: string;
-        large: string;
-    };
-    location: {
-        country: string;
-    };
-}
+import {userService} from "./services/userService.ts";
+import {User} from "./models/user.interface.ts";
 
 const App: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
@@ -29,16 +11,23 @@ const App: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
-    // Obtener 100 usuarios de la API
+    // Fetch users from the API using our service
     const fetchUsers = async () => {
+        setIsLoading(true);
+        setError(null);
+
         try {
-            const response = await fetch('https://randomuser.me/api/?results=100');
-            const data = await response.json();
-            setUsers(data.results);
-            setOriginalUsers(data.results);
+            const fetchedUsers = await userService.fetchUsers(100);
+            setUsers(fetchedUsers);
+            setOriginalUsers(fetchedUsers);
         } catch (error) {
-            console.error('Error al obtener los usuarios:', error);
+            setError('Failed to load users. Please try again later.');
+            console.error('Error fetching users:', error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -46,85 +35,70 @@ const App: React.FC = () => {
         fetchUsers();
     }, []);
 
-    // Eliminar usuario
+    // Delete user
     const handleDelete = (userId: string): void => {
         setUsers(prevUsers => prevUsers.filter(user => user.login.uuid !== userId));
     };
 
-    // Abrir modal en modo edición
+    // Open modal in edit mode
     const handleEdit = (user: User): void => {
         setSelectedUser(user);
         setModalMode('edit');
         setIsModalOpen(true);
     };
 
-    // Abrir modal en modo añadir
+    // Open modal in add mode
     const handleAdd = (): void => {
         setSelectedUser(null);
         setModalMode('add');
         setIsModalOpen(true);
     };
 
-    // Restaurar los 100 usuarios originales
+    // Restore the original users
     const handleRestore = (): void => {
         setUsers(originalUsers);
     };
 
-    // Función para guardar los cambios tras editar o añadir
-    const handleSave = (updatedData: Partial<User>) => {
+    // Save changes after edit or add
+    const handleSave = (updatedData: Partial<User>): void => {
         if (modalMode === 'edit' && selectedUser) {
-            const updatedUser: User = {
-                ...selectedUser,
-                ...updatedData,
-                name: {
-                    ...selectedUser.name,
-                    ...updatedData.name
-                },
-                location: {
-                    ...selectedUser.location,
-                    ...updatedData.location
-                }
-            };
+            // Use the service to update the user
+            const updatedUser = userService.updateUser(selectedUser, updatedData);
+
             setUsers(prevUsers =>
                 prevUsers.map(user =>
                     user.login.uuid === updatedUser.login.uuid ? updatedUser : user
                 )
             );
         } else if (modalMode === 'add') {
-            const newUser: User = {
-                login: { uuid: Date.now().toString() },
-                name: {
-                    title: 'Mr ',
-                    first: updatedData.name?.first || '',
-                    last: updatedData.name?.last || ''
-                },
-                email: updatedData.email || '',
-                picture: {
-                    thumbnail: 'https://via.placeholder.com/50',
-                    medium: 'https://via.placeholder.com/100',
-                    large: 'https://via.placeholder.com/150'
-                },
-                location: {
-                    country: updatedData.location?.country || ''
-                }
-            };
+            // Use the service to create a new user
+            const newUser = userService.createUser(updatedData);
             setUsers(prevUsers => [...prevUsers, newUser]);
         }
         setIsModalOpen(false);
     };
 
-    const closeModal = () => {
+    const closeModal = (): void => {
         setIsModalOpen(false);
     };
 
     return (
         <div className="App">
             <h1>Listado de Usuarios</h1>
+
+            {error && <div className="error-message">{error}</div>}
+
             <div className="actions">
                 <button onClick={handleAdd}>Añadir</button>
                 <button onClick={handleRestore}>Restaurar</button>
             </div>
-            <UserTable users={users} onDelete={handleDelete} onEdit={handleEdit} />
+
+            {isLoading ? (
+                <div className="loading">Cargando usuarios...</div>
+            ) : (
+                <UserTable users={users} onDelete={handleDelete} onEdit={handleEdit} />
+            )}
+
             <UserModal
                 isOpen={isModalOpen}
                 mode={modalMode}
@@ -135,5 +109,4 @@ const App: React.FC = () => {
         </div>
     );
 };
-
 export default App;

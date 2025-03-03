@@ -1,11 +1,5 @@
 import React from 'react';
-import { User } from '../App';
-
-interface UserTableProps {
-    users: User[];
-    onDelete: (id: string) => void;
-    onEdit: (user: User) => void;
-}
+import {UserTableProps} from "../models/UserTableProps.interface.ts";
 
 const UserTable: React.FC<UserTableProps> = ({ users, onDelete, onEdit }) => {
     return (

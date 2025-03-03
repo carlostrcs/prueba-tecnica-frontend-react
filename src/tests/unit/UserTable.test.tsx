@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {render, screen, fireEvent, within} from '@testing-library/react';
 import UserTable from "../../components/UserTable.tsx";
-import {User} from "../../App.tsx";
 import '@testing-library/jest-dom';
+import {User} from "../../models/user.interface.ts";
 
 const sampleUser: User = {
     login: { uuid: '1' },

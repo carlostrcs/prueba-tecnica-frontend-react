@@ -103,9 +103,37 @@ button:hover {
   box-sizing: border-box;
 }
 
+.modal form input.error {
+  border: 1px solid #e74c3c;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
 .modal-buttons {
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Loading and error states */
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2rem;
+  color: #3498db;
+}
+
+.error-message {
+  background-color: #ffeaea;
+  color: #e74c3c;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 /* Diseño responsive */
