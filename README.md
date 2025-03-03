@@ -1,50 +1,105 @@
-# React + TypeScript + Vite
+## Features
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- 📋 View and manage users in a responsive table interface
+- ➕ Add new users with form validation
+- ✏️ Edit existing user information
+- 🗑️ Delete users
+- 🔄 Restore original user data
+- 🧪 Comprehensive test coverage (unit and E2E)
 
-Currently, two official plugins are available:
+## Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- TypeScript
+- Vite for building and development
+- Jest for unit testing
+- Playwright for end-to-end testing
+- Service-oriented architecture
+- CSS for styling
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+├── src/
+│   ├── components/       # UI components
+│   ├── interfaces/       # TypeScript interfaces
+│   ├── services/         # API and business logic 
+│   ├── tests/
+│   │   ├── e2e/          # End-to-end tests with Playwright
+│   │   └── unit/         # Unit tests with Jest
+│   ├── App.tsx           # Main application component
+│   └── main.tsx          # Application entry point
+├── public/               # Static assets
+└── ...config files       # Configuration for TS, Vite, Jest, etc.
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Getting Started
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Prerequisites
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+- Node.js (version 16 or later)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/carlostrcs/prueba-tecnica-frontend-react.git
+   cd prueba-tecnica-frontend-react
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   # or
+   yarn
+   ```
+
+3. Start the development server
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## Running Tests
+
+### Unit Tests
+
+```bash
+npm run test:unit
+# or
+yarn test:unit
 ```
+
+### E2E Tests
+
+Make sure the development server is running first.
+
+```bash
+npm run test:e2e
+# or
+yarn test:e2e
+```
+
+### All Tests
+
+```bash
+npm run test
+# or
+yarn test
+```
+
+## Build
+
+To build the application for production:
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+The build artifacts will be stored in the `dist/` directory.
