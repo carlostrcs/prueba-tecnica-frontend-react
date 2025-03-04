@@ -25,6 +25,7 @@ export const userService = {
                 first: userData.name?.first || '',
                 last: userData.name?.last || ''
             },
+            phone: userData.phone || '',
             email: userData.email || '',
             picture: {
                 thumbnail: 'https://via.placeholder.com/50',
@@ -48,7 +49,8 @@ export const userService = {
             location: {
                 ...originalUser.location,
                 ...updatedData.location
-            }
+            },
+            phone: updatedData.phone || ''
         };
     }
 };

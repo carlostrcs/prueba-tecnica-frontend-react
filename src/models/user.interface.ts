@@ -8,6 +8,7 @@ export interface User {
         last: string;
     };
     email: string;
+    phone: string;
     picture: {
         thumbnail: string;
         medium: string;

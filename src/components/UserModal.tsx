@@ -10,6 +10,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSa
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
+    const [phone, setPhone] = useState<string>('');
     const [country, setCountry] = useState<string>('');
     const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -19,12 +20,14 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSa
             setFirstName(user.name.first);
             setLastName(user.name.last);
             setEmail(user.email);
+            setPhone(user.phone);
             setCountry(user.location.country);
         } else {
             setTitle('Mr');
             setFirstName('');
             setLastName('');
             setEmail('');
+            setPhone('');
             setCountry('');
         }
         // Reset errors when modal opens/changes
@@ -48,6 +51,10 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSa
             newErrors.email = 'El formato del email no es válido';
         }
 
+        if (!phone.trim()) {
+            newErrors.phone = 'El teléfono es obligatorio';
+        }
+
         if (!country.trim()) {
             newErrors.country = 'El país es obligatorio';
         }
@@ -66,6 +73,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSa
         const updatedData: Partial<User> = {
             name: { title, first: firstName, last: lastName },
             email,
+            phone,
             location: { country }
         };
 
@@ -111,6 +119,17 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSa
                         />
                         </label>
                         {errors.email && <div className="error-message">{errors.email}</div>}
+                    </div>
+                    <div>
+                        <label>Phone:
+                            <input
+                                type="phone"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                className={errors.phone ? 'error' : ''}
+                            />
+                        </label>
+                        {errors.phone && <div className="error-message">{errors.phone}</div>}
                     </div>
                     <div>
                         <label>País:
