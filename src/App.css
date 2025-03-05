@@ -29,7 +29,7 @@ th {
 }
 
 img {
-  border-radius: 50%;
+  border-radius: 10%;
 }
 
 button {
@@ -151,3 +151,4 @@ button:hover {
     margin: 5px;
   }
 }
+

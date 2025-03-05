@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-international-phone": "^4.5.0",
+    "react-phone-number-input": "^3.4.12"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.26.3",
