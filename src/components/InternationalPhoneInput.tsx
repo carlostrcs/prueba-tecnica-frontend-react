@@ -36,18 +36,20 @@ const InternationalPhoneInput: React.FC<InternationalPhoneInputProps> = ({
     };
 
     return (
-        <div className={className}>
-            {label && <label className="phone-input-label">{label}</label>}
-            <PhoneInput
-                //defaultCountry={defaultCountry}
-                value={value}
-                onChange={handleChange}
-                placeholder={placeholder}
-                inputClassName={error ? 'phone-input-error' : ''}
-                //showFlags={true}
-                forceDialCode={true}
-            />
-            {error && <div className="error-message">{error}</div>}
+        <div>
+            <div className={className} style={{width: "200px"}}>
+                {label && <label className="phone-input-label">{label}</label>}
+                <PhoneInput
+                    //defaultCountry={defaultCountry}
+                    value={value}
+                    onChange={handleChange}
+                    placeholder={placeholder}
+                    inputClassName={error ? 'phone-input-error' : ''}
+                    //showFlags={true}
+                    forceDialCode={true}
+                />
+                {error && <div className="error-message">{error}</div>}
+            </div>
         </div>
     );
 };
