@@ -130,7 +130,3 @@
     opacity: 1;
     color: var(--PhoneInputCountrySelectArrow-color--focus);
 }
-
-.PhoneInput--focus .PhoneInputInput{
-    border-color: #CACACA !important;
-}
