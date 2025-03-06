@@ -3,6 +3,7 @@ import {User} from "../models/user.interface.ts";
 import {UserModalProps} from "../models/UserModalProps.interface.ts";
 import InternationalPhoneInput from "./InternationalPhoneInput.tsx";
 import PhoneNumberInput from "./PhoneNumberInput.tsx";
+import {isValidPhoneNumber} from "libphonenumber-js";
 
 
 
@@ -42,7 +43,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSa
 
     const validateForm = (): boolean => {
         const newErrors: Record<string, string> = {};
-
+        
         if (!firstName.trim()) {
             newErrors.firstName = 'El nombre es obligatorio';
         }
@@ -59,12 +60,23 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSa
 
         // Validar el teléfono seleccionado
         if (selectedPhone === 'phone1') {
+            console.log(selectedPhone);
+            console.log(phone1);
+            console.log(phone2);
+            console.log(isValidPhoneNumber(phone1));
             if (!phone1.trim()) {
                 newErrors.phone1 = 'El teléfono es obligatorio';
             }
         } else {
+            console.log(selectedPhone);
+            console.log(phone1);
+            console.log(phone2);
+            console.log(isValidPhoneNumber(phone2));
             if (!phone2.trim()) {
                 newErrors.phone2 = 'El teléfono es obligatorio';
+            }
+            if (!isValidPhoneNumber(phone2)) {
+                newErrors.phone2 = 'El teléfono es inválido';
             }
         }
 
