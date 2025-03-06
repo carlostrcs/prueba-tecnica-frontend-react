@@ -2,7 +2,7 @@ import React from 'react';
 import PhoneInput from 'react-phone-number-input';
 import { isPossiblePhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import styles from '../PhoneNumberInput.module.css';
+import '../PhoneNumberInput.css';
 interface PhoneNumberInputProps {
     value: string;
     onChange: (value: string) => void;
@@ -19,9 +19,10 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
                                                                onChange,
                                                                error,
                                                                onValidationChange,
+                                                               className = '',
                                                                label = 'Teléfono',
                                                                placeholder = 'Ingrese número de teléfono',
-                                                               // defaultCountry = 'US' 
+                                                               //defaultCountry = "US" 
                                                            }) => {
     const handleChange = (newValue: string | undefined) => {
         const phoneValue = newValue || '';
@@ -35,11 +36,11 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
     };
 
     return (
-        <div className={`${styles.phoneInputContainer}`}>
+        <div className={className}>
             {label && <label className="phone-input-label">{label}</label>}
             <PhoneInput
                 international
-                // defaultCountry={defaultCountry}
+                defaultCountry="US"
                 value={value}
                 onChange={handleChange}
                 placeholder={placeholder}
