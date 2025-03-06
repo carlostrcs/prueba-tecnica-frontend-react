@@ -1,6 +1,7 @@
 import React from 'react';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
+import '../InternationalPhoneInput.css';
 
 interface InternationalPhoneInputProps {
     value: string;
