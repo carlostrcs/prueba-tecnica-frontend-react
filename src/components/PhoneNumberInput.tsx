@@ -36,7 +36,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
     };
 
     return (
-        <div className={className}>
+        <div className={className} style={{width: "200px"}}>
             {label && <label className="phone-input-label">{label}</label>}
             <PhoneInput
                 international
@@ -45,7 +45,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
                 onChange={handleChange}
                 placeholder={placeholder}
                 className={error ? 'phone-input-error' : ''}
-                countryCallingCodeEditable={false}
+                //countryCallingCodeEditable={false}
             />
             {error && <div className="error-message">{error}</div>}
         </div>

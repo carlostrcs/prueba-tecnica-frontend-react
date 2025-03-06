@@ -46,7 +46,7 @@ const InternationalPhoneInput: React.FC<InternationalPhoneInputProps> = ({
                     placeholder={placeholder}
                     inputClassName={error ? 'phone-input-error' : ''}
                     //showFlags={true}
-                    forceDialCode={true}
+                    //forceDialCode={true}
                 />
                 {error && <div className="error-message">{error}</div>}
             </div>
