@@ -37,8 +37,9 @@ const InternationalPhoneInput: React.FC<InternationalPhoneInputProps> = ({
 
     return (
         <div>
+            {label && <label className="phone-input-label">{label}</label>}
             <div className={className} style={{width: "200px"}}>
-                {label && <label className="phone-input-label">{label}</label>}
+                
                 <PhoneInput
                     //defaultCountry={defaultCountry}
                     value={value}

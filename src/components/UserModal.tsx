@@ -6,8 +6,6 @@ import PhoneNumberInput from "./PhoneNumberInput.tsx";
 import {isValidPhoneNumber} from "libphonenumber-js";
 
 
-
-
 const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSave }) => {
     const [title, setTitle] = useState<string>('');
     const [firstName, setFirstName] = useState<string>('');
@@ -66,6 +64,9 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSa
             console.log(isValidPhoneNumber(phone1));
             if (!phone1.trim()) {
                 newErrors.phone1 = 'El teléfono es obligatorio';
+            }
+            if (!isValidPhoneNumber(phone1)) {
+                newErrors.phone1 = 'El teléfono es inválido';
             }
         } else {
             console.log(selectedPhone);
