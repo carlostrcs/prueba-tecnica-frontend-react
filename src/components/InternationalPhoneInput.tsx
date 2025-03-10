@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import '../InternationalPhoneInput.css';
+import {usePhoneInputTranslation} from "../hooks/usePhoneInputTranslation.ts";
 
 interface InternationalPhoneInputProps {
     value: string;
@@ -12,7 +13,9 @@ interface InternationalPhoneInputProps {
     label?: string;
     placeholder?: string;
     defaultCountry?: string;
+    language?: string; // Idioma para las traducciones
 }
+
 
 const InternationalPhoneInput: React.FC<InternationalPhoneInputProps> = ({
                                                                              value,
@@ -22,24 +25,26 @@ const InternationalPhoneInput: React.FC<InternationalPhoneInputProps> = ({
                                                                              className = '',
                                                                              label = 'Teléfono',
                                                                              placeholder = 'Ingrese número de teléfono',
+                                                                             language = 'fr' // Idioma por defecto
                                                                              //defaultCountry = 'es'
                                                                          }) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    usePhoneInputTranslation(containerRef, language);
+    
     const handleChange = (newValue: string) => {
         onChange(newValue);
 
-        // Validación básica (puedes ajustar según tus necesidades)
-        // Esta librería no tiene una función específica de validación como react-phone-number-input
+        // Validación básica
         const isValid = newValue.length > 8;
         if (onValidationChange) {
             onValidationChange(isValid);
         }
     };
-
+    
     return (
-        <div>
+        <div ref={containerRef}>
             {label && <label className="phone-input-label">{label}</label>}
             <div className={className} style={{width: "200px"}}>
-                
                 <PhoneInput
                     //defaultCountry={defaultCountry}
                     value={value}

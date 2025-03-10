@@ -3,8 +3,8 @@ import {User} from "../models/user.interface.ts";
 import {UserModalProps} from "../models/UserModalProps.interface.ts";
 import InternationalPhoneInput from "./InternationalPhoneInput.tsx";
 import PhoneNumberInput from "./PhoneNumberInput.tsx";
-import {isValidPhoneNumber} from "libphonenumber-js";
-
+// import {isValidPhoneNumber} from "libphonenumber-js";
+import {isValidPhoneNumber} from "react-phone-number-input";
 
 const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSave }) => {
     const [title, setTitle] = useState<string>('');
@@ -77,6 +77,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSa
                 newErrors.phone2 = 'El teléfono es obligatorio';
             }
             if (!isValidPhoneNumber(phone2)) {
+                console.log()
                 newErrors.phone2 = 'El teléfono es inválido';
             }
         }
@@ -192,6 +193,7 @@ const UserModal: React.FC<UserModalProps> = ({ isOpen, mode, user, onClose, onSa
                                     error={selectedPhone === 'phone2' ? errors.phone2 : undefined}
                                     label="Teléfono (react-international-phone):"
                                     defaultCountry="es"
+                                    language={"es"}
                                 />
                             </div>
                         </div>
